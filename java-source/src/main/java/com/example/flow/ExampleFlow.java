@@ -30,9 +30,9 @@ import static net.corda.core.contracts.ContractsDSL.requireThat;
  * All methods called within the [FlowLogic] sub-class need to be annotated with the @Suspendable annotation.
  */
 public class ExampleFlow {
-    @InitiatingFlow
-    @StartableByRPC
-    public static class Initiator extends FlowLogic<SignedTransaction> {
+//    @InitiatingFlow
+//    @StartableByRPC
+    public static class Initiator extends GenericIOUFlowDefinition {
 
         private final int iouValue;
         private final Party otherParty;
@@ -119,7 +119,7 @@ public class ExampleFlow {
         }
     }
 
-    @InitiatedBy(Initiator.class)
+    @InitiatedBy(GenericIOUFlowDefinition.class)
     public static class Acceptor extends FlowLogic<SignedTransaction> {
 
         private final FlowSession otherPartyFlow;
